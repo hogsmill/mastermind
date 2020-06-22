@@ -33,6 +33,6 @@ export default {
 </script>
 
 <style>
-  #selectColor { background-color: #fff; width: 100px; border: 1px solid #ccc; position: absolute; z-index: 10; padding-top: 6px; visibility: hidden; }
+  #selectColor { top: 0; left: 0; background-color: #fff; width: 100px; border: 1px solid #ccc; position: absolute; z-index: 10; padding-top: 6px; visibility: hidden; }
   #selectColor div div { display: inline-block; width: 20px; height: 20px; margin: 3px; }
 </style>

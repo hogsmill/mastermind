@@ -67,16 +67,16 @@ export const store = new Vuex.Store({
       state.guessing = payload;
     },
     updateSolution1: (state, payload) => {
-      state.solution1 = payload;
+      state.solution1 = payload.color;
     },
     updateSolution2: (state, payload) => {
-      state.solution2 = payload;
+      state.solution2 = payload.color;
     },
     updateSolution3: (state, payload) => {
-      state.solution3 = payload;
+      state.solution3 = payload.color;
     },
     updateSolution4: (state, payload) => {
-      state.solution4 = payload;
+      state.solution4 = payload.color;
     },
     updateRoundResult: (state, payload) => {
       var round = state.rounds[payload.round]

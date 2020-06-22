@@ -3,7 +3,7 @@
     <h2>Guess</h2>
     <div v-for="(round, roundIndex) in rounds" :key="'round-' + roundIndex" class="row">
       <div v-for="(guess, guessIndex) in round.guess" :key="'guess-' + guessIndex" class="col guess">
-        <div :class="getClass(guess)"> </div>
+        <div :class="getClass(guess)" @click="setColor($event)"> </div>
       </div>
       <div class="guess-button">
         <button v-if="roundIndex == currentRound" class="btn btn-info btn-sm" @click="guess()">Guess</button>
@@ -13,23 +13,44 @@
 </template>
 
 <script>
+import selectColor from '../behaviour/selectColor.js'
+
 export default {
+
   methods: {
     getClass(value) {
       return value == '' ? 'empty' : value
+    },
+    setColor($event) {
+      var target = $event.target
+      selectColor.positionSelect(target, "xxx")
     },
     guess() {
       this.getResult()
       this.$store.dispatch("updateCurrentRound", this.currentRound + 1)
     },
+    checkColor(color) {
+      for (var i = 0; i < this.solution.length; i++) {
+        if (color == this.solution[i]) {
+          return true
+        }
+      }
+      return false
+    },
     getResult() {
       var round = this.rounds[this.currentRound]
       var correct = 0
       var correctColor = 0
-      for (var i = 0; i < 4; i++) {
-        console.log(this.solution[i], ' == ', round.guess[i])
+      var i
+      for (i = 0; i < 4; i++) {
+        if (this.checkColor(round.guess[i])) {
+          correctColor = correctColor + 1
+        }
+      }
+      for (i = 0; i < 4; i++) {
         if (this.solution[i] == round.guess[i]) {
           correct = correct + 1
+          correctColor = correctColor - 1
         }
       }
       this.$store.dispatch("updateRoundResult", {

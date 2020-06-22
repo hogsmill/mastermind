@@ -31,6 +31,11 @@
       </div>
     </modal>
 
+    <SelectColor />
+
+    <input type="hidden" id="updateData" />
+    <input type="hidden" id="updateMethod" />
+
   </div>
 </template>
 
@@ -43,6 +48,7 @@ import AboutView from "./components/about/AboutView.vue";
 import Solution from "./components/Solution.vue";
 import Guess from "./components/Guess.vue";
 import Result from "./components/Result.vue";
+import SelectColor from "./components/SelectColor.vue";
 
 export default {
   name: 'App',
@@ -51,7 +57,8 @@ export default {
     AboutView,
     Solution,
     Guess,
-    Result
+    Result,
+    SelectColor
   },
   data() {
     return {

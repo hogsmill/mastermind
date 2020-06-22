@@ -9,41 +9,47 @@
       <div class="col">
         <button class="btn btn-info btn-sm" @click="startGame()">Go</button>
       </div>
-      <div class="col item" :class="getClass(solution1)" @click="setSolution1('red')"> </div>
-      <div class="col item" :class="getClass(solution2)" @click="setSolution2('red')"> </div>
-      <div class="col item" :class="getClass(solution3)" @click="setSolution3('red')"> </div>
-      <div class="col item" :class="getClass(solution4)" @click="setSolution4('red')"> </div>
+      <div class="col item" :class="getClass(solution1)" @click="setSolution1($event)"> </div>
+      <div class="col item" :class="getClass(solution2)" @click="setSolution2($event)"> </div>
+      <div class="col item" :class="getClass(solution3)" @click="setSolution3($event)"> </div>
+      <div class="col item" :class="getClass(solution4)" @click="setSolution4($event)"> </div>
 
     </div>
   </div>
 </template>
 
 <script>
+import selectColor from '../behaviour/selectColor.js'
+
 export default {
   methods: {
     getClass(value) {
       return value == '' ? 'empty' : value
     },
     clear() {
-    this.$store.dispatch("updateSolution1", '')
-    this.$store.dispatch("updateSolution2", '')
-    this.$store.dispatch("updateSolution3", '')
-    this.$store.dispatch("updateSolution4", '')
+      this.$store.dispatch("updateSolution1", '')
+      this.$store.dispatch("updateSolution2", '')
+      this.$store.dispatch("updateSolution3", '')
+      this.$store.dispatch("updateSolution4", '')
     },
-    setSolution1(color) {
-      this.$store.dispatch("updateSolution1", color)
+    setSolution1($event) {
+      var target = $event.target
+      selectColor.positionSelect(target, "updateSolution1")
     },
-    setSolution2(color) {
-      this.$store.dispatch("updateSolution2", color)
+    setSolution2($event) {
+      var target = $event.target
+      selectColor.positionSelect(target, "updateSolution2")
     },
-    setSolution3(color) {
-      this.$store.dispatch("updateSolution3", color)
+    setSolution3($event) {
+      var target = $event.target
+      selectColor.positionSelect(target, "updateSolution3")
     },
-    setSolution4(color) {
-      this.$store.dispatch("updateSolution4", color)
+    setSolution4($event) {
+      var target = $event.target
+      selectColor.positionSelect(target, "updateSolution4")
     },
     startGame() {
-      console.log(this.solution)
+      console.log(this.solution1, this.solution2, this.solution3, this.solution4)
     }
 
   },

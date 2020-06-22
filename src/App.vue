@@ -5,7 +5,7 @@
     <div v-if="showAbout">
       <AboutView />
     </div>
-    <div class="game-name text-right">
+    <div v-if="host" class="game-name text-right">
       <button class="btn btn-sm btn-info" v-if="!gameName" @click="show">Set Game Name</button>
       <span v-if="gameName">Game: {{gameName}}</span>
     </div>
@@ -62,8 +62,7 @@ export default {
   },
   data() {
     return {
-      gameName: '',
-      host: false
+      gameName: ''
     }
   },
   methods: {
@@ -79,6 +78,9 @@ export default {
     }
   },
   computed: {
+    host() {
+      return this.$store.getters.getHost;
+    },
     showAbout() {
       return this.$store.getters.getShowAbout;
     }
@@ -94,7 +96,7 @@ export default {
   },
   mounted() {
     if (location.search == "?host") {
-      this.host = true
+      this.$store.dispatch("updateHost", true)
     }
   }
 }

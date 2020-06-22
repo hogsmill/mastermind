@@ -8,14 +8,15 @@ export const store = new Vuex.Store({
     showAbout: false,
     host: false,
     role: false,
-    solution1: 'blue',
-    solution2: 'green',
-    solution3: 'yellow',
-    solution4: 'red',
+    solution1: '',
+    solution2: '',
+    solution3: '',
+    solution4: '',
+    colors: ['red', 'orange', 'yellow', 'blue', 'green', 'purple'],
     rounds: [
-      { guess: ['red', 'green', 'blue', 'yellow'], result: {}},
-      { guess: ['red', 'green', 'blue', 'yellow'], result: {}},
-      { guess: ['red', 'green', 'yellow', 'blue'], result: {}},
+      { guess: ['', '', '', ''], result: {}},
+      { guess: ['', '', '', ''], result: {}},
+      { guess: ['', '', '', ''], result: {}},
       { guess: ['', '', '', ''], result: {}},
       { guess: ['', '', '', ''], result: {}},
       { guess: ['', '', '', ''], result: {}},
@@ -48,6 +49,9 @@ export const store = new Vuex.Store({
     getSolution4: (state) => {
       return state.solution4;
     },
+    getColors: (state) => {
+      return state.colors;
+    },
     getRounds: (state) => {
       return state.rounds;
     },
@@ -78,14 +82,19 @@ export const store = new Vuex.Store({
     updateSolution4: (state, payload) => {
       state.solution4 = payload.color;
     },
+    updateCurrentRound: (state, payload) => {
+      state.currentRound = payload;
+    },
     updateRoundResult: (state, payload) => {
       var round = state.rounds[payload.round]
       round.result.correct = payload.correct;
       round.result.correctColor = payload.correctColor;
       state.rounds.splice(payload.round, 1, round)
     },
-    updateCurrentRound: (state, payload) => {
-      state.currentRound = payload;
+    updateRound: (state, payload) => {
+      var round = state.rounds[payload.round]
+      round.guess[payload.n] = payload.color
+      state.rounds.splice(payload.round, 1, round)
     }
   },
   actions: {
@@ -112,6 +121,9 @@ export const store = new Vuex.Store({
     },
     updateCurrentRound: ({ commit }, payload) => {
       commit("updateCurrentRound", payload);
+    },
+    updateRound: ({ commit }, payload) => {
+      commit("updateRound", payload);
     }
   }
 });

@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style>
-  .result { padding: 10px; height: 40px; text-align: left; }
+  .result { padding: 10px; height: 36px; text-align: left; }
   .result div { margin-right: 10px; width: 20px; height: 20px; display: inline-block; }
   .black { background-color: black; }
   .white { background-color: white; border: 1px solid #000; }

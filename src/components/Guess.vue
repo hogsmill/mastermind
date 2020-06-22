@@ -3,7 +3,7 @@
     <h2>Guess</h2>
     <div v-for="(round, roundIndex) in rounds" :key="'round-' + roundIndex" class="row">
       <div v-for="(guess, guessIndex) in round.guess" :key="'guess-' + guessIndex" class="col guess">
-        <div :class="getClass(guess)" @click="setColor($event)"> </div>
+        <div :class="getClass(guess)" @click="setColor($event, roundIndex, guessIndex)" class="rounded"> </div>
       </div>
       <div class="guess-button">
         <button v-if="roundIndex == currentRound" class="btn btn-info btn-sm" @click="guess()">Guess</button>
@@ -21,13 +21,28 @@ export default {
     getClass(value) {
       return value == '' ? 'empty' : value
     },
-    setColor($event) {
-      var target = $event.target
-      selectColor.positionSelect(target, "xxx")
+    setColor($event, round, n) {
+      if (round == this.currentRound) {
+        var target = $event.target
+        selectColor.storeData({ round: this.currentRound, n: n })
+        selectColor.positionSelect(target, "updateRound")
+      }
+    },
+    win() {
+      return this.rounds[this.currentRound].result.correct == 4
+    },
+    lose() {
+      return !this.win() && this.currentRound > 8
     },
     guess() {
       this.getResult()
-      this.$store.dispatch("updateCurrentRound", this.currentRound + 1)
+      if (this.win()) {
+        alert("Boom! You won!")
+      } else if (this.lose()) {
+        alert("You lost - better luck next time...")
+      } else {
+        this.$store.dispatch("updateCurrentRound", this.currentRound + 1)
+      }
     },
     checkColor(color) {
       for (var i = 0; i < this.solution.length; i++) {
@@ -81,7 +96,7 @@ export default {
 
 <style>
   .game { background-color: #ddd; }
-  .guess { padding: 10px; height: 40px; }
+  .guess { padding: 10px; height: 36px; }
   .guess div { margin: 0 auto; width: 20px; height: 20px; }
   .guess-button { width: 90px; }
 </style>

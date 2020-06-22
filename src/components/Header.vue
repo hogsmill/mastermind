@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     updateShowAbout(payload) {
-      console.log('showAbout', payload)
       this.$store.dispatch("updateShowAbout", payload);
     },
   },

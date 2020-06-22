@@ -18,7 +18,9 @@ export default {
   methods: {
     setValue(color) {
       var updateData = document.getElementById('updateData').value
-      if (!updateData) {
+      if (updateData) {
+        updateData = JSON.parse(updateData)
+      } else {
         updateData = {}
       }
       var updateMethod = document.getElementById('updateMethod').value

@@ -4,7 +4,7 @@ if [ "$1" == "-f" ]; then
   FORCE=true
 fi
 
-PORT=3003
+PORT=3005
 PWD=`pwd`
 APP=`basename $PWD`
 GIT=`git pull`
@@ -20,7 +20,7 @@ if [ -f "src/server.js" ]; then
   if [ "$SERVER" != "" ]; then
     kill -9 $SERVER
   fi
-  node src/server.js $PORT 'Context Switching' &
+  node src/server.js $PORT 'Mastermind' &
 fi
 
 ps -ef | grep node

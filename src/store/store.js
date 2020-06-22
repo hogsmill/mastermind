@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     showAbout: false,
     host: false,
     role: false,
+    lost: false,
     solution1: '',
     solution2: '',
     solution3: '',
@@ -33,6 +34,9 @@ export const store = new Vuex.Store({
     },
     getHost: (state) => {
       return state.host;
+    },
+    getLost: (state) => {
+      return state.lost;
     },
     getRole: (state) => {
       return state.role;
@@ -66,6 +70,9 @@ export const store = new Vuex.Store({
     updateHost: (state, payload) => {
       state.host = payload;
     },
+    updateLost: (state, payload) => {
+      state.lost = payload;
+    },
     updateSetting: (state, payload) => {
       state.setting = payload;
       state.guessing = payload;
@@ -92,8 +99,14 @@ export const store = new Vuex.Store({
       state.rounds.splice(payload.round, 1, round)
     },
     updateRound: (state, payload) => {
-      var round = state.rounds[payload.round]
-      round.guess[payload.n] = payload.color
+      var round
+      if (payload.color) {
+        round = state.rounds[payload.round]
+        round.guess[payload.n] = payload.color
+      }
+      if (payload.reset) {
+        round = { guess: ['', '', '', ''], result: {}}
+      }
       state.rounds.splice(payload.round, 1, round)
     }
   },
@@ -103,6 +116,9 @@ export const store = new Vuex.Store({
     },
     updateHost: ({ commit }, payload) => {
       commit("updateHost", payload);
+    },
+    updateLost: ({ commit }, payload) => {
+      commit("updateLost", payload);
     },
     updateSolution1: ({ commit }, payload) => {
       commit("updateSolution1", payload);

@@ -32,7 +32,9 @@ export default {
       return this.rounds[this.currentRound].result.correct == 4
     },
     lose() {
-      return !this.win() && this.currentRound > 8
+      var lost = !this.win() && this.currentRound > 8
+      this.$store.dispatch("updateLost", lost)
+      return lost
     },
     guess() {
       this.getResult()

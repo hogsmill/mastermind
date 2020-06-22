@@ -9,10 +9,10 @@
       <div class="col">
         <button class="btn btn-info btn-sm" @click="newGame()">New Game</button>
       </div>
-      <div v-if="host" class="col item" :class="getClass(solution1)" @click="setSolution1($event)"> </div>
-      <div v-if="host" class="col item" :class="getClass(solution2)" @click="setSolution2($event)"> </div>
-      <div v-if="host" class="col item" :class="getClass(solution3)" @click="setSolution3($event)"> </div>
-      <div v-if="host" class="col item" :class="getClass(solution4)" @click="setSolution4($event)"> </div>
+      <div v-if="host || lost" class="col item" :class="getClass(solution1)" @click="setSolution1($event)"> </div>
+      <div v-if="host || lost" class="col item" :class="getClass(solution2)" @click="setSolution2($event)"> </div>
+      <div v-if="host || lost" class="col item" :class="getClass(solution3)" @click="setSolution3($event)"> </div>
+      <div v-if="host || lost" class="col item" :class="getClass(solution4)" @click="setSolution4($event)"> </div>
 
     </div>
   </div>
@@ -37,6 +37,10 @@ export default {
       return this.colors[index]
     },
     newGame() {
+      this.$store.dispatch("updateLost", false)
+      for (var i = 0; i < 10; i++) {
+        this.$store.dispatch("updateRound", { round: i, reset: true })
+      }
       this.$store.dispatch("updateSolution1", { color: this.randomColor() })
       this.$store.dispatch("updateSolution2", { color: this.randomColor() })
       this.$store.dispatch("updateSolution3", { color: this.randomColor() })
@@ -63,6 +67,9 @@ export default {
   computed: {
     host() {
       return this.$store.getters.getHost
+    },
+    lost() {
+      return this.$store.getters.getLost
     },
     solution1() {
       return this.$store.getters.getSolution1

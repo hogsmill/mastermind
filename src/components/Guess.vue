@@ -44,28 +44,27 @@ export default {
         this.$store.dispatch("updateCurrentRound", this.currentRound + 1)
       }
     },
-    checkColor(color) {
-      for (var i = 0; i < this.solution.length; i++) {
-        if (color == this.solution[i]) {
-          return true
+    isCorrect(i, round, solution) {
+      return round.guess[i] == solution[i]
+    },
+    isCorrectColor(i, round, solution) {
+      var correctColor = false
+      for (var j = 0; j < 4; j++) {
+        if (i != j && round.guess[i] == solution[j]) {
+          correctColor = true
         }
       }
-      return false
+      return correctColor
     },
     getResult() {
       var round = this.rounds[this.currentRound]
       var correct = 0
       var correctColor = 0
-      var i
-      for (i = 0; i < 4; i++) {
-        if (this.checkColor(round.guess[i])) {
-          correctColor = correctColor + 1
-        }
-      }
-      for (i = 0; i < 4; i++) {
-        if (this.solution[i] == round.guess[i]) {
+      for (var i = 0; i < 4; i++) {
+        if (this.isCorrect(i, round, this.solution)) {
           correct = correct + 1
-          correctColor = correctColor - 1
+        } else if (this.isCorrectColor(i, round, this.solution)) {
+          correctColor = correctColor + 1
         }
       }
       this.$store.dispatch("updateRoundResult", {

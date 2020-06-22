@@ -81,3 +81,5 @@ button { margin: 2px; }
 .yellow { background-color: yellow; }
 .orange { background-color: orange; }
 .purple { background-color: purple; }
+
+.empty { background-color: #eee; border: 1px solid #aaa; }

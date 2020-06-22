@@ -24,6 +24,7 @@ export default {
       var updateMethod = document.getElementById('updateMethod').value
       updateData.color = color
       this.$store.dispatch(updateMethod, updateData)
+      document.getElementById("selectColor").style.visibility = "hidden"
     }
   }
 }

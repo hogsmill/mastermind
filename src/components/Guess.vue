@@ -83,6 +83,5 @@ export default {
   .game { background-color: #ddd; }
   .guess { padding: 10px; height: 40px; }
   .guess div { margin: 0 auto; width: 20px; height: 20px; }
-  .guess .empty { border: 1px solid #aaa; }
   .guess-button { width: 90px; }
 </style>

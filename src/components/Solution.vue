@@ -24,7 +24,8 @@ import selectColor from '../behaviour/selectColor.js'
 export default {
   methods: {
     getClass(value) {
-      return value == '' ? 'empty' : value
+      console.log(value)
+      return !value ? 'empty' : value
     },
     clear() {
       this.$store.dispatch("updateSolution1", '')
@@ -73,5 +74,4 @@ export default {
 <style>
   .solution { background-color: #ddd; padding: 10px; margin-bottom: 12px; }
   .item { margin: 6px; }
-  .empty { background-color: #eee; }
 </style>

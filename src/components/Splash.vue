@@ -1,0 +1,54 @@
+<template>
+  <div v-if="won || lost" id="splash" class="card border shadow">
+    <div v-if="won">
+      <h1 class="card-title center">Winner!</h1>
+      <div class="card-body">Nice one - your are a Mastermind; another game?</div>
+      <button class="btn btn-info" @click="newGame()">New Game</button>
+    </div>
+    <div v-if="lost">
+      <h1 class="card-title center">Loser!</h1>
+      <div class="card-body">Sorry, you lost; another game?</div>
+      <button class="btn btn-info" @click="newGame()">New Game</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    randomColor() {
+      var index = Math.floor(Math.random() * Math.floor(6))
+      return this.colors[index]
+    },
+    newGame() {
+      this.$store.dispatch("updateWon", false)
+      this.$store.dispatch("updateLost", false)
+      for (var i = 0; i < 10; i++) {
+        this.$store.dispatch("updateRound", { round: i, reset: true })
+      }
+      this.$store.dispatch("updateSolution1", { color: this.randomColor() })
+      this.$store.dispatch("updateSolution2", { color: this.randomColor() })
+      this.$store.dispatch("updateSolution3", { color: this.randomColor() })
+      this.$store.dispatch("updateSolution4", { color: this.randomColor() })
+      this.$store.dispatch("updateCurrentRound", 0)
+    }
+  },
+  computed: {
+    won() {
+      return this.$store.getters.getWon
+    },
+    lost() {
+      return this.$store.getters.getLost
+    },
+    colors() {
+      return this.$store.getters.getColors
+    }
+  }
+}
+</script>
+
+<style>
+  #splash {
+    position: absolute; top: 0; left: 0; z-index: 10;
+    width: 50%; height: 50%; margin: 25%; }
+</style>

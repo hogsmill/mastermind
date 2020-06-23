@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     showAbout: false,
     host: false,
     role: false,
+    won: false,
     lost: false,
     solution1: '',
     solution2: '',
@@ -34,6 +35,9 @@ export const store = new Vuex.Store({
     },
     getHost: (state) => {
       return state.host;
+    },
+    getWon: (state) => {
+      return state.won;
     },
     getLost: (state) => {
       return state.lost;
@@ -69,6 +73,9 @@ export const store = new Vuex.Store({
     },
     updateHost: (state, payload) => {
       state.host = payload;
+    },
+    updateWon: (state, payload) => {
+      state.won = payload;
     },
     updateLost: (state, payload) => {
       state.lost = payload;
@@ -116,6 +123,9 @@ export const store = new Vuex.Store({
     },
     updateHost: ({ commit }, payload) => {
       commit("updateHost", payload);
+    },
+    updateWon: ({ commit }, payload) => {
+      commit("updateWon", payload);
     },
     updateLost: ({ commit }, payload) => {
       commit("updateLost", payload);

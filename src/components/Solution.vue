@@ -37,6 +37,7 @@ export default {
       return this.colors[index]
     },
     newGame() {
+      this.$store.dispatch("updateWon", false)
       this.$store.dispatch("updateLost", false)
       for (var i = 0; i < 10; i++) {
         this.$store.dispatch("updateRound", { round: i, reset: true })
@@ -86,6 +87,9 @@ export default {
     colors() {
       return this.$store.getters.getColors
     }
+  },
+  created() {
+    this.newGame()
   }
 }
 </script>

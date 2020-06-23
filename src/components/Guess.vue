@@ -28,21 +28,19 @@ export default {
         selectColor.positionSelect(target, "updateRound")
       }
     },
-    win() {
-      return this.rounds[this.currentRound].result.correct == 4
+    won() {
+      var won = this.rounds[this.currentRound].result.correct == 4
+      this.$store.dispatch("updateWon", won)
+      return won
     },
-    lose() {
-      var lost = !this.win() && this.currentRound > 8
+    lost() {
+      var lost = !this.won() && this.currentRound > 8
       this.$store.dispatch("updateLost", lost)
       return lost
     },
     guess() {
       this.getResult()
-      if (this.win()) {
-        alert("Boom! You won!")
-      } else if (this.lose()) {
-        alert("You lost - better luck next time...")
-      } else {
+      if (!this.won() && !this.lost()) {
         this.$store.dispatch("updateCurrentRound", this.currentRound + 1)
       }
     },

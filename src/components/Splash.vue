@@ -2,11 +2,23 @@
   <div v-if="won || lost" id="splash" class="card border shadow">
     <div v-if="won">
       <h1 class="card-title center">Winner!</h1>
+      <div class="answer center">
+        <div :class="solution1" class="rounded"> </div>
+        <div :class="solution2" class="red rounded"> </div>
+        <div :class="solution3" class="red rounded"> </div>
+        <div :class="solution4" class="red rounded"> </div>
+      </div>
       <div class="card-body">Nice one - your are a Mastermind; another game?</div>
       <button class="btn btn-info" @click="newGame()">New Game</button>
     </div>
     <div v-if="lost">
       <h1 class="card-title center">Loser!</h1>
+      <div class="answer center">
+        <div :class="solution1" class="rounded"> </div>
+        <div :class="solution2" class="red rounded"> </div>
+        <div :class="solution3" class="red rounded"> </div>
+        <div :class="solution4" class="red rounded"> </div>
+      </div>
       <div class="card-body">Sorry, you lost; another game?</div>
       <button class="btn btn-info" @click="newGame()">New Game</button>
     </div>
@@ -42,6 +54,18 @@ export default {
     },
     colors() {
       return this.$store.getters.getColors
+    },
+    solution1() {
+      return this.$store.getters.getSolution1
+    },
+    solution2() {
+      return this.$store.getters.getSolution2
+    },
+    solution3() {
+      return this.$store.getters.getSolution3
+    },
+    solution4() {
+      return this.$store.getters.getSolution4
     }
   }
 }
@@ -51,4 +75,5 @@ export default {
   #splash {
     position: absolute; top: 0; left: 0; z-index: 10;
     width: 50%; height: 50%; margin: 25%; }
+  .answer div { display: inline-block; margin: 20px; width: 20px; height: 20px; }
 </style>

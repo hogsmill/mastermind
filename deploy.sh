@@ -14,13 +14,12 @@ if [ "$FORCE" != "true" -a "$GIT" == "Already up to date." ]; then
 fi
 
 npm run build
+rm /var/www/html/$APP/css/*
+rm /var/www/html/$APP/js/*
 cp -R dist/* /var/www/html/$APP
 if [ -f "src/server.js" ]; then
   SERVER=`ps -ef | grep server.js | grep $PORT | awk {'print $2'}`
   if [ "$SERVER" != "" ]; then
     kill -9 $SERVER
   fi
-  node src/server.js $PORT 'Mastermind' &
 fi
-
-ps -ef | grep node

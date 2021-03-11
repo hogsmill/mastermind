@@ -7,6 +7,7 @@ fi
 PORT=3005
 PWD=`pwd`
 APP=`basename $PWD`
+git stash
 GIT=`git pull`
 echo $GIT
 if [ "$FORCE" != "true" -a "$GIT" == "Already up to date." ]; then

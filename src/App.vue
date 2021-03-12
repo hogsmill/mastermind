@@ -10,7 +10,6 @@
       <span v-if="gameName">Game: {{gameName}}</span>
     </div>
     <div v-if="!showAbout">
-      <h1>Mastermind</h1>
       <div class="container">
         <div class="row">
           <Solution />

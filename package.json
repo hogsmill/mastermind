@@ -11,7 +11,7 @@
     "core-js": "^3.19.0",
     "death": "^1.1.0",
     "ini": "^2.0.0",
-    "sass": "^1.43.3",
+    "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
     "socket.io": "^4.3.1",
     "socket.io-client": "^4.3.2",

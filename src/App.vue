@@ -20,23 +20,10 @@
         </div>
       </div>
     </div>
-
-    <modal name="set-game-name" :height="120" :classes="['rounded']">
-      <div class="text-right"><span @click="hide" class="glyphicon glyphicon-star">x</span></div>
-      <h4>Enter Your Game Name</h4>
-      <div class="set-game-name">
-        <input type="text" id="game-name" class="form-control" />
-        <button class="btn btn-sm btn-info" @click="saveGameName">Save</button>
-      </div>
-    </modal>
-
     <SelectColor />
-
     <Splash />
-
     <input type="hidden" id="updateData" />
     <input type="hidden" id="updateMethod" />
-
   </div>
 </template>
 

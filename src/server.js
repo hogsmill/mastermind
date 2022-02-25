@@ -19,8 +19,8 @@ ON_DEATH(function(signal, err) {
   })
 })
 
-global.TextEncoder = require("util").TextEncoder
-global.TextDecoder = require("util").TextDecoder
+global.TextEncoder = require('util').TextEncoder
+global.TextDecoder = require('util').TextDecoder
 
 let httpServer
 let io
@@ -50,20 +50,20 @@ if (!prod) {
   })
 }
 
-var connectDebugOff = prod
-var debugOn = !prod
+const connectDebugOff = prod
+const debugOn = !prod
 
-var connections = 0
-var maxConnections = 10
+let connections = 0
+const maxConnections = 10
 
 function emit(event, data) {
   if (debugOn) {
-    console.log(event, data);
+    console.log(event, data)
   }
   io.emit(event, data)
 }
 
-io.on("connection", (socket) => {
+io.on('connection', (socket) => {
   connections = connections + 1
   if (connections > maxConnections) {
     console.log(`Too many connections. Socket ${socket.id} closed`)
@@ -72,20 +72,20 @@ io.on("connection", (socket) => {
     connectDebugOff || console.log(`A user connected with socket id ${socket.id}. (${connections} connections)`)
   }
 
-  socket.on("disconnect", () => {
+  socket.on('disconnect', () => {
     connections = connections - 1
     connectDebugOff || console.log(`User with socket id ${socket.id} has disconnected. (${connections} connections)`)
   })
 
-  socket.on("contexts", (data) => { emit("contexts", data) })
+  socket.on('contexts', (data) => { emit('contexts', data) })
 
-  socket.on("noSwitchTick", (data) => { emit("noSwitchTick", data) })
+  socket.on('noSwitchTick', (data) => { emit('noSwitchTick', data) })
 
-  socket.on("switchTick", (data) => { emit("switchTick", data) })
-});
+  socket.on('switchTick', (data) => { emit('switchTick', data) })
+})
 
-var port = process.argv[2] || 3005
+const port = process.argv[2] || 3005
 
 httpServer.listen(port, () => {
-  console.log("Listening on *:" + port);
-});
+  console.log('Listening on *:' + port)
+})

@@ -1,12 +1,12 @@
 
 
 
-var SelectColor = {
+const SelectColor = {
 
   positionSelect: function(elem, updateMethod) {
-    var x = elem.getBoundingClientRect().x + 6
-    var y = elem.getBoundingClientRect().y + window.scrollY + 6
-    var selectColor = document.getElementById('selectColor')
+    const x = elem.getBoundingClientRect().x + 6
+    const y = elem.getBoundingClientRect().y + window.scrollY + 6
+    const selectColor = document.getElementById('selectColor')
     selectColor.style.top = y + 'px'
     selectColor.style.left = x + 'px'
     selectColor.style.visibility = 'visible'

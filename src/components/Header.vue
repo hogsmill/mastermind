@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light mb-4">
     <a class="navbar-brand" href="https://agilesimulations.co.uk">
-      <img src="/lego.png" class="ml-4" height="38px" />
+      <img src="/lego.png" class="ml-4" height="38px">
     </a>
     <button
       class="navbar-toggler"
@@ -12,16 +12,14 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" />
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <h1>Mastermind</h1>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" :class="{ active: !showAbout }">
-          <a class="nav-link pointer" @click="updateShowAbout(false)"
-            >Simulation</a
-          >
+          <a class="nav-link pointer" @click="updateShowAbout(false)">Simulation</a>
         </li>
         <li class="nav-item" :class="{ active: showAbout }">
           <a class="nav-link pointer" @click="updateShowAbout(true)">About</a>
@@ -33,22 +31,22 @@
 
 <script>
 export default {
-  created() {
-    if (location.search == "?host") {
-      this.$store.dispatch("updateHost", true);
-    }
-  },
   computed: {
     showAbout() {
-      return this.$store.getters.getShowAbout;
+      return this.$store.getters.getShowAbout
     },
+  },
+  created() {
+    if (location.search == '?host') {
+      this.$store.dispatch('updateHost', true)
+    }
   },
   methods: {
     updateShowAbout(payload) {
-      this.$store.dispatch("updateShowAbout", payload);
+      this.$store.dispatch('updateShowAbout', payload)
     },
   },
-};
+}
 </script>
 
 <style>

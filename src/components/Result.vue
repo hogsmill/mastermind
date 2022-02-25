@@ -3,10 +3,14 @@
     <h2>Result</h2>
     <div v-for="(round, roundIndex) in rounds" :key="'round-' + roundIndex" class="row">
       <div class="col result">
-      <div v-for="(result, correctIndex) in round.result.correct" :key="'correct-' + correctIndex"
-        class="black rounded-circle"> </div>
-      <div v-for="(result, correctColorIndex) in round.result.correctColor" :key="'correctColor-' + correctColorIndex"
-        class="white rounded-circle"> </div>
+        <div
+          v-for="(result, correctIndex) in round.result.correct" :key="'correct-' + correctIndex"
+          class="black rounded-circle"
+        />
+        <div
+          v-for="(result, correctColorIndex) in round.result.correctColor" :key="'correctColor-' + correctColorIndex"
+          class="white rounded-circle"
+        />
       </div>
     </div>
   </div>
@@ -16,7 +20,7 @@
 export default {
   computed: {
     rounds() {
-      return this.$store.getters.getRounds;
+      return this.$store.getters.getRounds
     },
     solution() {
       return this.$store.getters.getSolution

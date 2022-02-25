@@ -1,14 +1,14 @@
 <template>
   <div id="selectColor" class="rounded shadow-sm">
     <div>
-      <div class="red" @click="setValue('red')"> </div>
-      <div class="orange" @click="setValue('orange')"> </div>
-      <div class="yellow" @click="setValue('yellow')"> </div>
+      <div class="red" @click="setValue('red')" />
+      <div class="orange" @click="setValue('orange')" />
+      <div class="yellow" @click="setValue('yellow')" />
     </div>
     <div>
-      <div class="blue" @click="setValue('blue')"> </div>
-      <div class="green" @click="setValue('green')"> </div>
-      <div class="purple" @click="setValue('purple')"> </div>
+      <div class="blue" @click="setValue('blue')" />
+      <div class="green" @click="setValue('green')" />
+      <div class="purple" @click="setValue('purple')" />
     </div>
   </div>
 </template>
@@ -17,16 +17,16 @@
 export default {
   methods: {
     setValue(color) {
-      var updateData = document.getElementById('updateData').value
+      let updateData = document.getElementById('updateData').value
       if (updateData) {
         updateData = JSON.parse(updateData)
       } else {
         updateData = {}
       }
-      var updateMethod = document.getElementById('updateMethod').value
+      const updateMethod = document.getElementById('updateMethod').value
       updateData.color = color
       this.$store.dispatch(updateMethod, updateData)
-      document.getElementById("selectColor").style.visibility = "hidden"
+      document.getElementById('selectColor').style.visibility = 'hidden'
     }
   }
 }
